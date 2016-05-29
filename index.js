@@ -2,8 +2,10 @@ var app = require('http').createServer(handler),
     io = require('socket.io').listen(app),
     fs = require('fs');
 
-app.listen(4000);
-console.log("Now listening.");
+var runAtPort = 4000;
+	
+app.listen(runAtPort);
+console.log("Now listening at port " + runAtPort);
 
 function handler (req, res) {
   fs.readFile(__dirname + '/index.html',
@@ -21,7 +23,8 @@ function handler (req, res) {
 
 
 var socks = [];
-var body = "'sup";
+var body = "Welcome to MiniNo Editor";
+
 io.sockets.on('connection', function (socket) {
   socks.push(socket);
   socket.emit('refresh', {body: body});
