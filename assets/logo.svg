@@ -21,6 +21,19 @@
      id="defs4">
     <inkscape:path-effect
        effect="powerstroke"
+       id="path-effect4297"
+       is_visible="true"
+       offset_points="0,5.7236458"
+       sort_points="true"
+       interpolator_type="Linear"
+       interpolator_beta="0.2"
+       start_linecap_type="zerowidth"
+       linejoin_type="round"
+       miter_limit="4"
+       end_linecap_type="zerowidth"
+       cusp_linecap_type="round" />
+    <inkscape:path-effect
+       effect="powerstroke"
        id="path-effect4293"
        is_visible="true"
        offset_points="0,0.5"
@@ -36,9 +49,9 @@
        effect="powerstroke"
        id="path-effect4289"
        is_visible="true"
-       offset_points="0,0.5"
+       offset_points="0,6.21144"
        sort_points="true"
-       interpolator_type="CubicBezierJohan"
+       interpolator_type="Linear"
        interpolator_beta="0.2"
        start_linecap_type="zerowidth"
        linejoin_type="round"
@@ -131,9 +144,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="5.3256308"
-     inkscape:cx="2170.9451"
-     inkscape:cy="-898.72156"
+     inkscape:zoom="7.5315793"
+     inkscape:cx="2149.1258"
+     inkscape:cy="-906.16147"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -142,7 +155,7 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:snap-global="true"
+     inkscape:snap-global="false"
      inkscape:snap-bbox="true"
      inkscape:bbox-paths="true"
      inkscape:bbox-nodes="true"
@@ -11246,10 +11259,19 @@ SUVORK5CYII=
        style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffdd;stroke-width:3;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <path
        style="fill:#ff0000;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 2152.4063,1950.9788 -13.2409,-25.758 a 0.25107653,0.24933671 36.973729 0 0 -0.4687,0.064 l -12.3804,64.6599 12.727,-63.8407 12.4698,25.3237 z"
+       d="m 2157.5083,1948.4115 -18.5662,-23.0783 7.469,28.6623 z"
        id="path4287"
        inkscape:path-effect="#path-effect4289"
-       inkscape:original-d="m 2151.9597,1951.2035 -13.0176,-25.8703 -12.6258,64.612"
-       inkscape:connector-curvature="0" />
+       inkscape:original-d="m 2151.9597,1951.2035 -13.0176,-25.8703"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#ff0000;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 2131.9334,1991.0446 7.0246,-65.6896 -18.2588,63.4908 z"
+       id="path4295"
+       inkscape:path-effect="#path-effect4297"
+       inkscape:original-d="m 2126.3163,1989.9452 12.6417,-64.5902"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
 </svg>
