@@ -1,6 +1,6 @@
 var app = require('http').createServer(handler),
-io = require('socket.io').listen(app),
-fs = require('fs');
+	io = require('socket.io').listen(app),
+	fs = require('fs');
 
 var runAtPort = 4000;
 

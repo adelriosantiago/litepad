@@ -1,67 +1,66 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>Minipad RTC Editor</title>
-		<link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
-		<link rel="stylesheet" href="http://codemirror.net/theme/ambiance.css">
-		<script src="http://codemirror.net/lib/codemirror.js"></script>
-		<script src="http://codemirror.net/addon/mode/overlay.js"></script>
-		<script src="http://codemirror.net/mode/xml/xml.js"></script>
-		<script src="http://codemirror.net/mode/markdown/markdown.js"></script>
-		<script src="http://codemirror.net/mode/gfm/gfm.js"></script>
-		
-		<!-- Code block highlighting modes -->
-		<script src="http://codemirror.net/mode/javascript/javascript.js"></script>
-		<script src="http://codemirror.net/mode/css/css.js"></script>
-		<script src="http://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
-		<script src="http://codemirror.net/mode/clike/clike.js"></script>
-		<script src="http://codemirror.net/mode/clojure/clojure.js"></script>
-		<script src="http://codemirror.net/mode/ruby/ruby.js"></script>
-		
-		<style type="text/css">
-			body
-			{
+<head>
+	<meta charset="utf-8">
+	<title>Minipad RTC Editor</title>
+	<link rel="stylesheet" href="http://codemirror.net/lib/codemirror.css">
+	<link rel="stylesheet" href="http://codemirror.net/theme/ambiance.css">
+	<script src="http://codemirror.net/lib/codemirror.js"></script>
+	<script src="http://codemirror.net/addon/mode/overlay.js"></script>
+	<script src="http://codemirror.net/mode/xml/xml.js"></script>
+	<script src="http://codemirror.net/mode/markdown/markdown.js"></script>
+	<script src="http://codemirror.net/mode/gfm/gfm.js"></script>
+	
+	<!-- Code block highlighting modes -->
+	<script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+	<script src="http://codemirror.net/mode/css/css.js"></script>
+	<script src="http://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="http://codemirror.net/mode/clike/clike.js"></script>
+	<script src="http://codemirror.net/mode/clojure/clojure.js"></script>
+	<script src="http://codemirror.net/mode/ruby/ruby.js"></script>
+	
+	<style type="text/css">
+		body
+		{
 			margin: 0;
 			padding: 0;
 			max-width:inherit;
 			height: 100%;
-			}
+		}
 			html, form, .CodeMirror, .CodeMirror-scroll
-			{
+		{
 			height: 100%;        
-			}
-		</style>
-	</head>
-	<body>
-		<textarea id="textit">Minipad RTC Editor</textarea>
-		
-		<script>
-			var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
-				mode: 'gfm',
-				lineNumbers: true,
-				theme: "ambiance"
-				//mode: "htmlmixed" //Syntax highlighting
-			});
-		</script>
-		
-		<script src="/socket.io/socket.io.js"></script>
-		<script>
-			var socket = io.connect();
-			socket.on('refresh', function (data) {
-				editor.setValue(data.body);
-			});
-			socket.on('change', function (data) {
-				console.log(data);
-				editor.replaceRange(data.text, data.from, data.to);
-			});
-			editor.on('change', function (i, op) {
-				console.log(op);
-				socket.emit('change', op);
-				socket.emit('refresh', editor.getValue());
-			});
-		</script>
+		}
+	</style>
+</head>
+<body>
+	<textarea id="textit">Minipad RTC Editor</textarea>
 	
-	</body>
-	</html>
-		
+	<script>
+		var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
+			mode: 'gfm',
+			lineNumbers: true,
+			theme: "ambiance"
+			//mode: "htmlmixed" //Syntax highlighting
+		});
+	</script>
+	
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io.connect();
+		socket.on('refresh', function (data) {
+			editor.setValue(data.body);
+		});
+		socket.on('change', function (data) {
+			console.log(data);
+			editor.replaceRange(data.text, data.from, data.to);
+		});
+		editor.on('change', function (i, op) {
+			console.log(op);
+			socket.emit('change', op);
+			socket.emit('refresh', editor.getValue());
+		});
+	</script>
+
+</body>
+</html>
