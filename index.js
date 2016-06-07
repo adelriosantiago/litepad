@@ -5,7 +5,7 @@ var app = require('http').createServer(handler),
 var runAtPort = 4000;
 
 app.listen(runAtPort);
-console.log("Now listening at port " + runAtPort);
+console.log("Litepad running at port " + runAtPort);
 
 function handler (req, res) {
 	fs.readFile(__dirname + '/index.html',
@@ -21,7 +21,7 @@ function handler (req, res) {
 }
 
 var socks = [];
-var body = "Welcome to Minipad RTC Editor";
+var body = "Welcome to Litepad RTC Editor";
 
 io.sockets.on('connection', function (socket) {
 	socks.push(socket);
