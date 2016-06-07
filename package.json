@@ -1,5 +1,5 @@
 {
-  "name": "minino-editor",
+  "name": "litepad-editor",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "socket.io": "^1.4.6"
   }
