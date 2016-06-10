@@ -1,11 +1,10 @@
 var app = require('http').createServer(handler),
 	io = require('socket.io').listen(app),
-	fs = require('fs');
+	fs = require('fs'),
+	port = 4000;
 
-var runAtPort = 4000;
-
-app.listen(runAtPort);
-console.log("Litepad running at port " + runAtPort);
+app.listen(port);
+console.log("Litepad running at port " + port);
 
 function handler (req, res) {
 	fs.readFile(__dirname + '/index.html',
