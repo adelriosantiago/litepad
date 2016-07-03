@@ -13,11 +13,6 @@
 	
 	<!-- Code block highlighting modes -->
 	<script src="http://codemirror.net/mode/javascript/javascript.js"></script>
-	<script src="http://codemirror.net/mode/css/css.js"></script>
-	<script src="http://codemirror.net/mode/htmlmixed/htmlmixed.js"></script>
-	<script src="http://codemirror.net/mode/clike/clike.js"></script>
-	<script src="http://codemirror.net/mode/clojure/clojure.js"></script>
-	<script src="http://codemirror.net/mode/ruby/ruby.js"></script>
 	
 	<style type="text/css">
 		body
@@ -38,10 +33,9 @@
 	
 	<script>
 		var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
-			mode: 'gfm',
+			mode: 'javascript',
 			lineNumbers: true,
 			theme: "ambiance"
-			//mode: "htmlmixed" //Syntax highlighting
 		});
 	</script>
 	
@@ -61,6 +55,5 @@
 			socket.emit('refresh', editor.getValue());
 		});
 	</script>
-
 </body>
 </html>

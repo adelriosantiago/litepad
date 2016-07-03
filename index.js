@@ -22,10 +22,9 @@ function handler (req, res) {
 var body = "Welcome to Litepad RTC Editor";
 
 io.sockets.on('connection', function (socket) {
-	socket.emit('refresh', {body: body});
+	socket.emit('refresh', { body: body });
 	
 	socket.on('refresh', function (body_) {
-		console.log('new body');
 		body = body_;
 	});
 	
