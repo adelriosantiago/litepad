@@ -1,14 +1,13 @@
 {
   "name": "litepad-editor",
   "version": "1.0.0",
-  "description": "",
+  "description": "Litepad editor is the most minimalist implementation of a real-time collaborative editor.",
   "main": "index.js",
   "scripts": {
-	"start": "node ./index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+	"start": "node ./index.js"
   },
   "author": "",
-  "license": "MIT",
+  "license": "GPL",
   "dependencies": {
     "socket.io": "^1.4.6"
   }
