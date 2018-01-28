@@ -24,7 +24,7 @@
 		}
 			html, form, .CodeMirror, .CodeMirror-scroll
 		{
-			height: 100%;        
+			height: 100%;
 		}
 	</style>
 </head>
@@ -50,7 +50,7 @@
 			editor.replaceRange(data.text, data.from, data.to);
 		});
 		editor.on('change', function (i, op) {
-			console.log(op);
+			console.log("op", op, "editor", editor);
 			socket.emit('change', op);
 			socket.emit('refresh', editor.getValue());
 		});
