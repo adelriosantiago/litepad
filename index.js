@@ -22,7 +22,9 @@ function handler (req, res) {
 var body = "Welcome to Litepad RTC Editor";
 
 io.sockets.on('connection', function (socket) {
-	socket.emit('refresh', { body: body });
+	socket.emit('refresh', { body: body }); //Propagate the value to the connected client
+	
+	//Events
 	
 	socket.on('refresh', function (body_) {
 		body = body_;
@@ -30,8 +32,6 @@ io.sockets.on('connection', function (socket) {
 	
 	socket.on('change', function (op) {
 		console.log(op);
-		if (op.origin == '+input' || op.origin == 'paste' || op.origin == '+delete') {
-            socket.broadcast.emit('change', op);
-		};
+		if (op.origin == '+input' || op.origin == 'paste' || op.origin == '+delete') socket.broadcast.emit('change', op);
 	});
 });
