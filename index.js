@@ -24,12 +24,10 @@ var body = "Welcome to Litepad RTC Editor";
 io.sockets.on('connection', function (socket) {
 	socket.emit('refresh', { body: body }); //Propagate the value to the connected client
 	
-	//Events
-	
+	//Socket events
 	socket.on('refresh', function (body_) {
 		body = body_;
 	});
-	
 	socket.on('change', function (op) {
 		console.log(op);
 		if (op.origin == '+input' || op.origin == 'paste' || op.origin == '+delete') socket.broadcast.emit('change', op);

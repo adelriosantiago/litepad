@@ -42,17 +42,20 @@
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
 		var socket = io.connect();
-		socket.on('refresh', function (data) {
+    //Editor
+		editor.on('change', function (i, op) {
+			console.log("op", op, "editor", editor);
+			socket.emit('change', op);
+			socket.emit('refresh', editor.getValue());
+		});
+    
+		//Socket events
+    socket.on('refresh', function (data) {
 			editor.setValue(data.body);
 		});
 		socket.on('change', function (data) {
 			console.log(data);
 			editor.replaceRange(data.text, data.from, data.to);
-		});
-		editor.on('change', function (i, op) {
-			console.log("op", op, "editor", editor);
-			socket.emit('change', op);
-			socket.emit('refresh', editor.getValue());
 		});
 	</script>
 </body>
