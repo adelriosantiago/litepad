@@ -45,7 +45,7 @@
       let socket = io.connect()
       //Editor
       editor.on("change", function (i, op) {
-        console.log("op", op, "editor", editor)
+        console.log("Latest op received:", op)
         socket.emit("change", op)
         socket.emit("refresh", editor.getValue())
       })
