@@ -45,7 +45,6 @@
       let socket = io.connect()
       //Editor
       editor.on("change", function (i, op) {
-        console.log("Latest op received:", op)
         socket.emit("change", op)
         socket.emit("refresh", editor.getValue())
       })
@@ -55,7 +54,7 @@
         editor.setValue(data.body)
       })
       socket.on("change", function (data) {
-        console.log(data)
+        console.log("Change received:", data)
         editor.replaceRange(data.text, data.from, data.to)
       })
     </script>
