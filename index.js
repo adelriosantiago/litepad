@@ -1,4 +1,4 @@
-var app = require("http").createServer(handler),
+const app = require("http").createServer(handler),
   io = require("socket.io").listen(app),
   fs = require("fs"),
   port = 4000
@@ -18,7 +18,7 @@ function handler(req, res) {
   })
 }
 
-var body = "Welcome to Litepad RTC Editor"
+let body = "Welcome to Litepad RTC Editor"
 
 io.sockets.on("connection", function (socket) {
   socket.emit("refresh", { body: body }) //Propagate the value to the connected client

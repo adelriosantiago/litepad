@@ -33,7 +33,7 @@
     <textarea id="textit">Litepad RTC Editor</textarea>
 
     <script>
-      var editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
+      let editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
         mode: "javascript",
         lineNumbers: true,
         theme: "ambiance",
@@ -42,7 +42,7 @@
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      var socket = io.connect()
+      let socket = io.connect()
       //Editor
       editor.on("change", function (i, op) {
         console.log("op", op, "editor", editor)
