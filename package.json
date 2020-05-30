@@ -4,7 +4,7 @@
   "description": "Litepad editor is the most minimalist implementation of a real-time collaborative editor.",
   "main": "index.js",
   "scripts": {
-	"start": "forever --verbose --uid \"litepad-editor\" -w ./index.js"
+    "start": "forever --verbose --uid \"litepad-editor\" -w ./index.js"
   },
   "author": "",
   "license": "GPL v2.0",
