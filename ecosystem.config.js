@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: "litepad.adelriosantiago.com",
+      name: "litepad",
       script: "index.js",
       args: "",
       watch: false,
