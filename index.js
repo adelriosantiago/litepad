@@ -21,7 +21,7 @@ function handler(req, res) {
 let body = "Welcome to Litepad RTC Editor"
 
 io.sockets.on("connection", function (socket) {
-  socket.emit("refresh", { body: body }) //Propagate the value to the connected client
+  socket.emit("refresh", { body }) //Propagate the value to the connected client
 
   //Socket events
   socket.on("refresh", function (_body) {
