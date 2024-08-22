@@ -2,15 +2,9 @@ module.exports = {
   apps: [
     {
       name: "litepad",
-      script: "index.js",
-      args: "",
+      script: "node",
+      args: "index.js",
       watch: false,
-      env: {
-        NODE_ENV: "development",
-      },
-      env_production: {
-        NODE_ENV: "production",
-      },
     },
   ],
 }
