@@ -1,9 +1,11 @@
+const package = require("./package.json")
+
 module.exports = {
   apps: [
     {
-      name: "litepad",
-      script: "node",
-      args: "index.js",
+      name: package.name,
+      script: package.main,
+      args: "",
       watch: false,
     },
   ],
