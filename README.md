@@ -2,7 +2,7 @@
 
 A minimalist realtime collaborative editor in Node.JS
 
-![Litepad image](http://adelriosantiago.com/articles/litepad/images/litepad.PNG)
+![Litepad image](overview.png)
 
 Litepad editor is the most minimalist implementation of a real-time collaborative editor. Litepad uses Socket.io to share every keystroke with all connected users.
 
@@ -16,4 +16,4 @@ Litepad editor is the most minimalist implementation of a real-time collaborativ
 
 # License
 
-GPL
+MIT
