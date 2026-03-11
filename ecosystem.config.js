@@ -1,10 +1,10 @@
-const package = require("./package.json")
+const pkg = require("./package.json")
 
 module.exports = {
   apps: [
     {
-      name: package.name,
-      script: package.main,
+      name: pkg.name,
+      script: pkg.main,
       args: "",
       watch: false,
     },
