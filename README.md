@@ -2,6 +2,8 @@
 
 [![Playwright Tests](https://github.com/adelriosantiago/litepad/actions/workflows/playwright.yml/badge.svg)](https://github.com/adelriosantiago/litepad/actions/workflows/playwright.yml)
 
+[![ESLint](https://github.com/adelriosantiago/litepad/actions/workflows/eslint.yml/badge.svg)](https://github.com/adelriosantiago/litepad/actions/workflows/eslint.yml)
+
 The smallest-ever realtime collaborative editor implementation in Node.JS.
 
 ![Litepad image](overview.png)
