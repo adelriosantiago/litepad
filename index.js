@@ -1,34 +1,42 @@
-const app = require("http").createServer(handler),
-  io = require("socket.io").listen(app),
-  fs = require("fs"),
-  port = 4000
+const fs = require("fs")
+const http = require("http")
+const socketIo = require("socket.io")
 
-app.listen(port)
-console.log("Litepad running at port " + port)
+const PORT = 4000
+let body = "Welcome to Litepad RTC Editor"
 
-function handler(req, res) {
-  fs.readFile(__dirname + "/index.html", function (err, data) {
-    if (err) {
+const handler = (req, res) => {
+  fs.readFile(`${__dirname}/index.html`, (error, data) => {
+    if (error) {
       res.writeHead(500)
       return res.end("Error loading index.html")
     }
 
     res.writeHead(200)
-    res.end(data)
+    return res.end(data)
   })
 }
 
-let body = "Welcome to Litepad RTC Editor"
+const app = http.createServer(handler)
+const io = socketIo.listen(app)
 
-io.sockets.on("connection", function (socket) {
-  socket.emit("refresh", { body }) //Propagate the value to the connected client
+app.listen(PORT)
+console.log(`Litepad running at port ${PORT}`)
 
-  //Socket events
-  socket.on("refresh", function (_body) {
-    body = _body
+io.sockets.on("connection", (socket) => {
+  // Keep newly joined clients synchronized with the shared editor state.
+  socket.emit("refresh", { body })
+
+  socket.on("refresh", (nextBody) => {
+    body = nextBody
   })
-  socket.on("change", function (op) {
-    if (op.origin == "+input" || op.origin == "paste" || op.origin == "+delete")
+
+  socket.on("change", (op) => {
+    const isUserInputChange =
+      op.origin === "+input" || op.origin === "paste" || op.origin === "+delete"
+
+    if (isUserInputChange) {
       socket.broadcast.emit("change", op)
+    }
   })
 })

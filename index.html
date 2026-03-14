@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -70,27 +70,31 @@
     <textarea id="textit">Litepad RTC Editor</textarea>
 
     <script>
-      let editor = CodeMirror.fromTextArea(document.getElementById("textit"), {
-        mode: "javascript",
-        lineNumbers: true,
-        theme: "ambiance",
-      })
+      const editor = CodeMirror.fromTextArea(
+        document.getElementById("textit"),
+        {
+          mode: "javascript",
+          lineNumbers: true,
+          theme: "ambiance",
+        }
+      )
     </script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
-      let socket = io.connect()
-      //Editor
-      editor.on("change", function (i, op) {
+      const socket = io.connect()
+
+      // Broadcast edits so other clients receive collaborative updates immediately.
+      editor.on("change", (_instance, op) => {
         socket.emit("change", op)
         socket.emit("refresh", editor.getValue())
       })
 
-      //Socket events
-      socket.on("refresh", function (data) {
+      socket.on("refresh", (data) => {
         editor.setValue(data.body)
       })
-      socket.on("change", function (data) {
+
+      socket.on("change", (data) => {
         console.log("Change received:", data)
         editor.replaceRange(data.text, data.from, data.to)
       })
