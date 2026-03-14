@@ -1,6 +1,6 @@
 # Litepad Editor
 
-[![Playwright Tests](https://github.com/mainrism/litepad/actions/workflows/playwright.yml/badge.svg)](https://github.com/mainrism/litepad/actions/workflows/playwright.yml)
+[![Playwright Tests](https://github.com/adelriosantiago/litepad/actions/workflows/playwright.yml/badge.svg)](https://github.com/adelriosantiago/litepad/actions/workflows/playwright.yml)
 
 The smallest-ever realtime collaborative editor implementation in Node.JS.
 
