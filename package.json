@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "pm2 start ecosystem.config.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:ui": "playwright test --ui"
   },
   "author": "",
   "license": "GPL v2.0",
@@ -13,6 +16,7 @@
     "socket.io": "^2.3.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.52.0",
     "nodemon": "^3.1.4"
   }
 }

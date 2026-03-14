@@ -1,5 +1,7 @@
 # Litepad Editor
 
+[![Playwright Tests](https://github.com/mainrism/litepad/actions/workflows/playwright.yml/badge.svg)](https://github.com/mainrism/litepad/actions/workflows/playwright.yml)
+
 The smallest-ever realtime collaborative editor implementation in Node.JS.
 
 ![Litepad image](overview.png)
@@ -15,6 +17,14 @@ Read the article at my [blog article](https://www.adelriosantiago.com/blog/litep
 2.- Do `npm start`
 
 3.- Load localhost:4000
+
+# Tests
+
+1.- Install dependencies with `npm install`
+
+2.- Install Playwright Chromium browser with `npx playwright install chromium`
+
+3.- Run tests with `npm run test:e2e`
 
 # License
 
