@@ -6,7 +6,7 @@ test.describe("Litepad app", () => {
 
     expect(response).not.toBeNull()
     expect(response.status()).toBe(200)
-    await expect(page).toHaveTitle("Litepad RTC Editor")
+    await expect(page).toHaveTitle("Litepad")
     await expect(page.locator(".CodeMirror")).toBeVisible()
     await expect(
       page.locator("script[src='/socket.io/socket.io.js']")

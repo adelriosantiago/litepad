@@ -1,8 +1,18 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Litepad RTC Editor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Minimalist real-time collaborative editor"
+    />
+    <title>Litepad</title>
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23181818'/%3E%3Ctext x='6' y='24' font-family='monospace' font-size='22' font-weight='700' fill='%23c8a96e'%3EL%3C/text%3E%3C/svg%3E"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css"
@@ -48,26 +58,136 @@
       referrerpolicy="no-referrer"
     ></script>
 
-    <!-- Code block highlighting modes -->
-    <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+    <style>
+      :root {
+        --bg-chrome: #181818;
+        --border: #252525;
+        --text-dim: #555;
+        --accent: #c8a96e;
+        --connected: #5a9e6a;
+        --disconnected: #7a4a4a;
+        --chrome-h: 36px;
+        --status-h: 24px;
+        --font-ui:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      }
 
-    <style type="text/css">
-      body {
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        max-width: inherit;
-        height: 100%;
       }
+
       html,
-      form,
+      body {
+        height: 100%;
+        overflow: hidden;
+        background: var(--bg-chrome);
+        font-family: var(--font-ui);
+      }
+
+      /* ── Header ── */
+      #header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: var(--chrome-h);
+        padding: 0 16px;
+        background: var(--bg-chrome);
+        border-bottom: 1px solid var(--border);
+        user-select: none;
+      }
+
+      #header-brand {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        color: var(--accent);
+        text-transform: uppercase;
+      }
+
+      #connection-status {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 11px;
+        color: var(--text-dim);
+        letter-spacing: 0.04em;
+      }
+
+      #status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--disconnected);
+        flex-shrink: 0;
+        transition:
+          background 0.4s,
+          box-shadow 0.4s;
+      }
+
+      #status-dot.live {
+        background: var(--connected);
+        box-shadow: 0 0 5px var(--connected);
+      }
+
+      /* ── Editor area ── */
+      #editor-wrap {
+        height: calc(100% - var(--chrome-h) - var(--status-h));
+      }
+
       .CodeMirror,
       .CodeMirror-scroll {
         height: 100%;
       }
+
+      .CodeMirror {
+        font-size: 14px;
+        line-height: 1.65;
+        font-family:
+          "JetBrains Mono", "Fira Code", "Cascadia Code", "Menlo", "Consolas",
+          monospace;
+      }
+
+      /* ── Status bar ── */
+      #statusbar {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 20px;
+        height: var(--status-h);
+        padding: 0 16px;
+        background: var(--bg-chrome);
+        border-top: 1px solid var(--border);
+        font-size: 11px;
+        color: var(--text-dim);
+        letter-spacing: 0.04em;
+        user-select: none;
+      }
     </style>
   </head>
   <body>
-    <textarea id="textit">Litepad RTC Editor</textarea>
+    <header id="header">
+      <span id="header-brand"
+        >Litepad | The 100 line real-time collaborative editor</span
+      >
+      <div id="connection-status">
+        <div id="status-dot"></div>
+        <span id="status-label">connecting</span>
+      </div>
+    </header>
+
+    <div id="editor-wrap">
+      <textarea id="textit"></textarea>
+    </div>
+
+    <footer id="statusbar">
+      <span id="stat-mode">markdown</span>
+      <span id="stat-lines">—</span>
+      <span id="stat-chars">—</span>
+    </footer>
 
     <script>
       const editor = CodeMirror.fromTextArea(
@@ -76,13 +196,39 @@
           mode: "javascript",
           lineNumbers: true,
           theme: "ambiance",
+          lineWrapping: true,
+          tabSize: 2,
+          autofocus: true,
         }
       )
+
+      const updateStats = () => {
+        const val = editor.getValue()
+        const lines = val.split("\n").length
+        const chars = val.length
+        document.getElementById("stat-lines").textContent =
+          `${lines} ${lines === 1 ? "line" : "lines"}`
+        document.getElementById("stat-chars").textContent =
+          `${chars} ${chars === 1 ? "char" : "chars"}`
+      }
+
+      editor.on("change", updateStats)
+      updateStats()
     </script>
 
     <script src="/socket.io/socket.io.js"></script>
     <script>
+      const dot = document.getElementById("status-dot")
+      const label = document.getElementById("status-label")
       const socket = io.connect()
+
+      const setConnected = (isLive) => {
+        dot.classList.toggle("live", isLive)
+        label.textContent = isLive ? "live" : "offline"
+      }
+
+      socket.on("connect", () => setConnected(true))
+      socket.on("disconnect", () => setConnected(false))
 
       // Broadcast edits so other clients receive collaborative updates immediately.
       editor.on("change", (_instance, op) => {
@@ -95,7 +241,6 @@
       })
 
       socket.on("change", (data) => {
-        console.log("Change received:", data)
         editor.replaceRange(data.text, data.from, data.to)
       })
     </script>

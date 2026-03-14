@@ -3,7 +3,8 @@ const http = require("http")
 const socketIo = require("socket.io")
 
 const PORT = 4000
-let body = "Welcome to Litepad RTC Editor"
+let body =
+  "# Welcome to Litepad\n\nA minimalist real-time collaborative editor.\nStart typing — changes sync instantly with everyone connected."
 
 const handler = (req, res) => {
   fs.readFile(`${__dirname}/index.html`, (error, data) => {
